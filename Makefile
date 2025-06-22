@@ -1,0 +1,52 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vhasanov <vhasanov@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/18 03:01:32 by vhasanov          #+#    #+#              #
+#    Updated: 2025/06/21 04:45:58 by vhasanov         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS = main.c read_map.c map_validation.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+       image_load.c render.c cleanup.c handler.c movement.c environment_setup.c key_setup.c map_check.c \
+       flood_fill.c
+
+OBJS = $(SRCS:.c=.o)
+NAME = so_long
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=42
+
+MLX_DIR = ./minilibx-linux
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+
+LIBFT_DIR = ./lib_ft
+LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
+
+all: $(NAME)
+
+$(NAME): $(LIBFT) $(OBJS)
+	make -C $(MLX_DIR)
+	$(CC) $(OBJS) $(MLX_FLAGS) $(LIBFT_FLAGS) -o $(NAME)
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -I$(MLX_DIR) -I$(LIBFT_DIR) -c $< -o $@
+
+clean:
+	rm -f $(OBJS)
+	make clean -C $(MLX_DIR)
+	make clean -C $(LIBFT_DIR)
+
+fclean: clean
+	rm -f $(NAME)
+	make fclean -C $(LIBFT_DIR)
+
+re: fclean all
+
+.PHONY: all clean fclean re
