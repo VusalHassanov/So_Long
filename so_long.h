@@ -6,7 +6,7 @@
 /*   By: vhasanov <vhasanov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 02:49:56 by vhasanov          #+#    #+#             */
-/*   Updated: 2025/06/22 05:50:36 by vhasanov         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:16:16 by vhasanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "./get_next_line/get_next_line.h"
-#include "./lib_ft/libft.h"
+# include "./lib_ft/libft.h"
 # include "./minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <stdlib.h>
@@ -23,7 +23,7 @@
 # define TILE_SIZE 64
 # define ESC_KEY 65307
 # define DESTROY_NOTIFY 17
-# define MOVE_DELAY 1000
+# define MOVE_DELAY 3000
 
 typedef struct s_game
 {
